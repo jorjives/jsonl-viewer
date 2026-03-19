@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    * { fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+    .filled { fill: currentColor; stroke: none; }
+  </style>
+  <!-- Outer frame -->
+  <rect x="1" y="1" width="14" height="14" rx="1.5" />
+  <!-- Pane divider -->
+  <line x1="5.5" y1="1" x2="5.5" y2="15" />
+  <!-- Sidebar list items -->
+  <line x1="2.5" y1="4" x2="4.5" y2="4" />
+  <line x1="2.5" y1="6.5" x2="4" y2="6.5" />
+  <line x1="2.5" y1="9" x2="4.5" y2="9" />
+  <line x1="2.5" y1="11.5" x2="3.8" y2="11.5" />
+  <!-- Detail pane: JSON structure -->
+  <text x="7" y="5" font-family="monospace" font-size="3.5" class="filled">{</text>
+  <line x1="8.2" y1="6.5" x2="13" y2="6.5" />
+  <line x1="8.2" y1="8.5" x2="12" y2="8.5" />
+  <line x1="8.2" y1="10.5" x2="13.5" y2="10.5" />
+  <text x="7" y="13.5" font-family="monospace" font-size="3.5" class="filled">}</text>
+</svg>

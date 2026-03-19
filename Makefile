@@ -13,6 +13,7 @@ build:
 	mkdir -p "$(PKG)/usr/bin"
 	mkdir -p "$(PKG)/usr/share/applications"
 	mkdir -p "$(PKG)/usr/share/mime/packages"
+	mkdir -p "$(PKG)/usr/share/icons/hicolor/scalable/apps"
 	sed 's/^Version: VERSION$$/Version: $(VERSION_LOCAL)/' \
 		debian/control > "$(PKG)/DEBIAN/control"
 	cp debian/postinst "$(PKG)/DEBIAN/postinst"
@@ -21,6 +22,8 @@ build:
 	ln -s ../share/jsonl-viewer/jsonl-viewer.py "$(PKG)/usr/bin/jsonl-viewer"
 	cp dev.jorj.jsonl-viewer.desktop "$(PKG)/usr/share/applications/"
 	cp debian/jsonl-viewer.xml "$(PKG)/usr/share/mime/packages/"
+	cp data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer-symbolic.svg \
+		"$(PKG)/usr/share/icons/hicolor/scalable/apps/"
 	dpkg-deb --root-owner-group --build "$(PKG)"
 	@echo "Built $(PKG).deb"
 

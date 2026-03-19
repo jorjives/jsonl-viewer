@@ -35,6 +35,7 @@ jobs:
           mkdir -p "$PKG/usr/bin"
           mkdir -p "$PKG/usr/share/applications"
           mkdir -p "$PKG/usr/share/mime/packages"
+          mkdir -p "$PKG/usr/share/icons/hicolor/scalable/apps"
 
           # Control file with version substituted
           sed "s/^Version: VERSION$/Version: ${{ steps.version.outputs.version }}/" \
@@ -51,6 +52,8 @@ jobs:
           # Desktop entry and MIME type
           cp dev.jorj.jsonl-viewer.desktop "$PKG/usr/share/applications/"
           cp debian/jsonl-viewer.xml "$PKG/usr/share/mime/packages/"
+          cp data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer-symbolic.svg \
+            "$PKG/usr/share/icons/hicolor/scalable/apps/"
 
           dpkg-deb --root-owner-group --build "$PKG"
 
