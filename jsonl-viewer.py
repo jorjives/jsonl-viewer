@@ -49,6 +49,7 @@ class JsonlViewer(Adw.Application):
 
         self.win = Adw.ApplicationWindow(application=self, title="JSONL Viewer")
         self.win.set_default_size(1000, 650)
+        self.win.set_icon_name("dev.jorj.jsonl-viewer")
 
         # Header bar with open button
         header = Adw.HeaderBar()

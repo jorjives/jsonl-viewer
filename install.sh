@@ -14,6 +14,7 @@ mkdir -p "$BIN_DIR" "$APP_DIR" "$MIME_DIR" "$ICON_DIR"
 ln -sf "$SCRIPT_DIR/jsonl-viewer.py" "$BIN_DIR/jsonl-viewer"
 
 # Install icon and desktop entry
+cp "$SCRIPT_DIR/data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer.svg" "$ICON_DIR/"
 cp "$SCRIPT_DIR/data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer-symbolic.svg" "$ICON_DIR/"
 cp "$SCRIPT_DIR/dev.jorj.jsonl-viewer.desktop" "$APP_DIR/"
 
@@ -32,7 +33,12 @@ EOF
 # Update MIME, desktop, and icon databases
 update-mime-database "$HOME/.local/share/mime" 2>/dev/null || true
 update-desktop-database "$APP_DIR" 2>/dev/null || true
-gtk-update-icon-cache "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
+# Ensure hicolor has an index.theme so the icon cache can be built
+HICOLOR_DIR="$HOME/.local/share/icons/hicolor"
+if [ ! -f "$HICOLOR_DIR/index.theme" ] && [ -f /usr/share/icons/hicolor/index.theme ]; then
+    cp /usr/share/icons/hicolor/index.theme "$HICOLOR_DIR/"
+fi
+gtk-update-icon-cache -f "$HICOLOR_DIR" 2>/dev/null || true
 
 echo "Installed successfully."
 echo "  Binary:  $BIN_DIR/jsonl-viewer"

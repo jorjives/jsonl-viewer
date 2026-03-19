@@ -22,6 +22,8 @@ build:
 	ln -s ../share/jsonl-viewer/jsonl-viewer.py "$(PKG)/usr/bin/jsonl-viewer"
 	cp dev.jorj.jsonl-viewer.desktop "$(PKG)/usr/share/applications/"
 	cp debian/jsonl-viewer.xml "$(PKG)/usr/share/mime/packages/"
+	cp data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer.svg \
+		"$(PKG)/usr/share/icons/hicolor/scalable/apps/"
 	cp data/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer-symbolic.svg \
 		"$(PKG)/usr/share/icons/hicolor/scalable/apps/"
 	dpkg-deb --root-owner-group --build "$(PKG)"
