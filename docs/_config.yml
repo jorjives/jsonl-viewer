@@ -1,0 +1,5 @@
+title: JSONL Viewer
+description: A GNOME desktop app for browsing and inspecting JSONL/NDJSON files
+remote_theme: just-the-docs/just-the-docs
+exclude:
+  - superpowers/
