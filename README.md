@@ -8,6 +8,10 @@ A GNOME desktop app for browsing and inspecting JSONL/NDJSON files.
 - **Live file watching** with incremental append for streaming logs
 - **Manual reload** via Ctrl+R
 
+![Browsing entries in a JSONL file](docs/screenshots/file-loaded.png)
+
+![Syntax-highlighted detail view with nested JSON](docs/screenshots/nested-json.png)
+
 ## Requirements
 
 - Python 3
