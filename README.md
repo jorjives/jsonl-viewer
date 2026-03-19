@@ -12,6 +12,8 @@ A GNOME desktop app for browsing and inspecting JSONL/NDJSON files.
 
 ![Syntax-highlighted detail view with nested JSON](docs/screenshots/nested-json.png)
 
+[Full documentation](https://jorjives.github.io/jsonl-viewer/) · [GitHub](https://github.com/jorjives/jsonl-viewer)
+
 ## Requirements
 
 - Python 3
@@ -50,7 +52,11 @@ If installed via install.sh:
 rm ~/.local/bin/jsonl-viewer
 rm ~/.local/share/applications/dev.jorj.jsonl-viewer.desktop
 rm ~/.local/share/mime/packages/jsonl-viewer.xml
+rm ~/.local/share/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer.svg
+rm ~/.local/share/icons/hicolor/scalable/apps/dev.jorj.jsonl-viewer-symbolic.svg
 update-mime-database ~/.local/share/mime
+update-desktop-database ~/.local/share/applications
+gtk-update-icon-cache ~/.local/share/icons/hicolor
 ```
 
 ## Usage
