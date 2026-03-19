@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+            echo "release_name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=0.0.0~edge" >> "$GITHUB_OUTPUT"
+            echo "release_name=edge" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build .deb
+        run: |
+          PKG="jsonl-viewer_${{ steps.version.outputs.version }}_all"
+          mkdir -p "$PKG/DEBIAN"
+          mkdir -p "$PKG/usr/share/jsonl-viewer"
+          mkdir -p "$PKG/usr/bin"
+          mkdir -p "$PKG/usr/share/applications"
+          mkdir -p "$PKG/usr/share/mime/packages"
+
+          # Control file with version substituted
+          sed "s/^Version: VERSION$/Version: ${{ steps.version.outputs.version }}/" \
+            debian/control > "$PKG/DEBIAN/control"
+
+          # Maintainer scripts
+          cp debian/postinst "$PKG/DEBIAN/postinst"
+          cp debian/prerm "$PKG/DEBIAN/prerm"
+
+          # App files
+          cp jsonl-viewer.py "$PKG/usr/share/jsonl-viewer/jsonl-viewer.py"
+          ln -s ../share/jsonl-viewer/jsonl-viewer.py "$PKG/usr/bin/jsonl-viewer"
+
+          # Desktop entry and MIME type
+          cp dev.jorj.jsonl-viewer.desktop "$PKG/usr/share/applications/"
+          cp debian/jsonl-viewer.xml "$PKG/usr/share/mime/packages/"
+
+          dpkg-deb --root-owner-group --build "$PKG"
+
+      - name: Delete existing edge release and tag
+        if: steps.version.outputs.prerelease == 'true'
+        run: |
+          gh release delete edge --yes --cleanup-tag 2>/dev/null || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create edge release
+        if: steps.version.outputs.prerelease == 'true'
+        run: |
+          gh release create edge \
+            jsonl-viewer_${{ steps.version.outputs.version }}_all.deb \
+            --title "edge" \
+            --prerelease \
+            --notes "Built from master at $(git rev-parse --short HEAD)"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create versioned release
+        if: steps.version.outputs.prerelease == 'false'
+        run: |
+          gh release create "${{ steps.version.outputs.release_name }}" \
+            jsonl-viewer_${{ steps.version.outputs.version }}_all.deb \
+            --title "${{ steps.version.outputs.release_name }}" \
+            --latest \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

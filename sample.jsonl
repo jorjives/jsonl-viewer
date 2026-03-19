@@ -1,0 +1,5 @@
+{"id": 1, "name": "Alice", "role": "engineer", "active": true}
+{"id": 2, "name": "Bob", "role": "designer", "tags": ["ui", "ux"]}
+{"id": 3, "name": "Charlie", "role": "manager", "reports": [1, 2]}
+{"id": 4, "title": "Bug report", "severity": "high", "description": "Something broke in the widget renderer when processing large inputs with special characters"}
+{"event": "deploy", "timestamp": "2026-03-16T10:00:00Z", "status": "success", "metadata": {"version": "1.2.3", "commit": "abc123"}}

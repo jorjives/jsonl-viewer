@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+docs/superpowers/
+jsonl-viewer_*_all/
+jsonl-viewer_*_all.deb
+.superpowers/

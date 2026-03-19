@@ -1,0 +1,10 @@
+Package: jsonl-viewer
+Version: VERSION
+Architecture: all
+Maintainer: jorjives
+Depends: python3, python3-gi, gir1.2-gtk-4.0, gir1.2-adw-1, gir1.2-gtksource-5
+Description: GNOME JSONL viewer with syntax highlighting
+ A two-pane viewer for JSONL/NDJSON files. Browse entries in a sidebar,
+ inspect formatted JSON with syntax highlighting, and right-click any
+ key to use it as the sidebar label. Supports file watching for live
+ tail of streaming logs.

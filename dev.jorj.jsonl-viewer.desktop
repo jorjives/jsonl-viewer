@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=JSONL Viewer
+Comment=Browse and inspect JSONL documents
+Exec=jsonl-viewer %f
+Icon=text-x-generic
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;Development;
+MimeType=application/x-ndjson;application/jsonl;
+StartupNotify=true

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "Running syntax check before push..."
+python3 -c "import ast; ast.parse(open('jsonl-viewer.py').read())"
+echo "Syntax OK"

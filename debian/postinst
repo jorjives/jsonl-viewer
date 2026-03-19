@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+# Update MIME and desktop databases so the app appears in file manager
+update-mime-database /usr/share/mime 2>/dev/null || true
+update-desktop-database /usr/share/applications 2>/dev/null || true
